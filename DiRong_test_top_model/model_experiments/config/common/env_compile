@@ -1,0 +1,11 @@
+COMPSET=atm_ocn_demo
+MACH=BSCC_D
+export LIBROOT=/public3/home/sc52823/DiRong_test_top_model/model_experiments/run/lib
+export INCROOT=/public3/home/sc52823/DiRong_test_top_model/model_experiments/run/lib/include
+export COMMON_COMPILER=/public3/home/sc52823/DiRong_test_top_model/model_experiments/config/common/machine/BSCC_D/common_compiler.BSCC_D.cfg
+export ENSEMBLE_NUM=0
+export OS=Linux
+export GMAKE_J=8
+export SUBMITTER=qsub
+export NUM_NODES=50
+export NUM_CORES_PER_NODE=64

@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<export_interfaces comp_full_name="atm_demo">
+    <export_interface interface_name="send_data_to_ocn">
+        <export_field field_name="psl" />
+        <export_field field_name="prect" />
+        <export_field field_name="fsds" />
+        <export_field field_name="flds" />
+        <export_field field_name="flds2" />
+    </export_interface>
+</export_interfaces>

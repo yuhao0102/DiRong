@@ -1,0 +1,69 @@
+#!/bin/bash
+##################################################################################
+#  Copyright (c) 2013, Tsinghua University. 
+#  This code is initially finished by Dr. Ruizhe Li on 2013/3/28,
+#  and then modified by Dr. Li Liu
+#  If you have any problem, please contact:
+#  Dr. Ruizhe Li via liruizhe@gmail.com
+#  or Dr. Li Liu via liuli-cess@tsinghua.edu.cn
+##################################################################################
+check=`expr $# % 4`
+if (( check != 0 ))
+then
+    echo $#
+    echo "Wrong paramters!"
+    exit 1;
+fi
+
+#Number of Models
+num_of_models=`expr $# / 4`
+conf_file=${log_dir}/job.conf.${configuration_time}
+submit_file=${log_dir}/job.submit.${configuration_time} 
+rm -f $conf_file
+
+declare -a proc_start
+declare -a proc_end
+proc_start_mid=0
+num_total_proc=0
+node_num=0
+param="mpirun"
+for (( i = 0; i < num_of_models; i++ ))
+do
+    execmd[i]=$1
+    shift
+    inputnml[i]=$1
+    shift
+    num_proc[i]=$1
+    shift
+    num_thread[i]=$1
+    shift
+    #if (( ${num_thread[i]} > $NUM_CORES_PER_NODE )); then
+    #    echo "Warrning! ${execmd[i]} uses an overmuch number(${num_thread[i]}) of threads, which is larger than the number($NUM_CORES_PER_NODE) of cores in a node."
+    #    echo "The number of threads will be reset to $NUM_CORES_PER_NODE" 
+    #    num_thread[i]=$NUM_CORES_PER_NODE
+    #fi
+    
+    if (( i == 0 )); then  
+       let proc_start[i]=0
+       let proc_end[i]=num_proc[i]-1
+       let proc_start_mid=proc_end[i]
+    else
+	let proc_start[i]=proc_start_mid+1
+        let proc_end[i]=proc_start[i]+num_proc[i]-1
+        let proc_start_mid=proc_end[i]
+    fi
+    let num_total_proc=proc_end[i]+1
+    cat >> $conf_file << EOF    
+${proc_start[i]}-${proc_end[i]} ${execmd[i]} ${inputnml[i]} ${ensemble_idx_id[i]}
+EOF
+done
+node_count=0
+let node_count=num_total_proc%NUM_CORES_PER_NODE
+if (( $node_count == 0 )); then
+    let node_num=num_total_proc/NUM_CORES_PER_NODE
+else
+    let node_num=num_total_proc/NUM_CORES_PER_NODE+1
+fi
+
+srun -p amd_256 -N $node_num -n $num_total_proc -o ${log_dir}/${CASENAME}.output.${configuration_time} -e ${log_dir}/${CASENAME}.error.${configuration_time} -J ${CASENAME} -l --multi-prog $conf_file
+

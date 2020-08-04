@@ -1,0 +1,9 @@
+&atm_demo_nml
+time_step               = 1800
+decomp_type_id          = 1
+coupling_freq           = 1800
+num_point               = 500000
+overlapping_rate        = 1.0
+read_ncfile				= true
+grid_file_name			= lonlat_grid_1.dat
+/

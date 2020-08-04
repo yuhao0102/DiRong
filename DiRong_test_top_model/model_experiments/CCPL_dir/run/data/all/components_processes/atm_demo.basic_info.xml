@@ -1,0 +1,4 @@
+<?xml version="1.0" ?>
+<Component>
+    <Online_Model comp_name="atm_demo" full_name="atm_demo" comp_type="atm" parent_full_name="ROOT" enabled_in_parent_coupling_generation="true" processes=" 0~99" />
+</Component>

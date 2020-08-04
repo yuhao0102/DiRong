@@ -1,0 +1,4 @@
+<?xml version="1.0" ?>
+<Component>
+    <Online_Model comp_name="ocn_demo" full_name="ocn_demo" comp_type="ocn" parent_full_name="ROOT" enabled_in_parent_coupling_generation="true" processes=" 100~199" />
+</Component>

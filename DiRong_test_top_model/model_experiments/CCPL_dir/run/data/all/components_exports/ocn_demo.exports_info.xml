@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<export_interfaces comp_full_name="ocn_demo">
+    <export_interface interface_name="send_data_to_atm">
+        <export_field field_name="sst" />
+        <export_field field_name="shf" />
+        <export_field field_name="ssh" />
+        <export_field field_name="mld" />
+        <export_field field_name="mld2" />
+    </export_interface>
+</export_interfaces>

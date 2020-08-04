@@ -1,0 +1,30 @@
+&compset_nml
+  exp_model               = "atm_ocn_demo"
+  case_name               = "model_experiments"
+  case_desc               = "model_experiments : The run template of atm_demo and ocn_demo, did configuration at 20200804-111500"
+  config_time             = "20200804-111500"
+  run_type                = "initial"
+  start_date              = 20150801
+  start_second            = 43200
+  stop_date               = 20150802
+  stop_second             = 43200
+  rest_freq_unit          = "seconds"
+  rest_freq_count         = 1800
+  stop_latency_seconds    = 0
+  component_name          = "ocn_demo"
+  compset_filename        = "comp_list.cfg"
+  comp_run_data_dir       = "/public3/home/sc52823/DiRong_test_top_model/model_experiments/run/ocn/ocn_demo/data"
+  comp_model_nml          = "ocn_demo.stdin"
+  cpl_interface_time_step = 1200
+  comp_log_filename       = "/public3/home/sc52823/DiRong_test_top_model/model_experiments/run/ocn/ocn_demo/run_logs/model_experiments.ocn_demo.log.20200804-111500"
+  leap_year               = .false.
+/
+
+&orb_nml
+  iyear_AD                = 1990
+/
+&ensemble_setting_nml
+  ensemble_member_id             = -1
+  random_seed_for_perturb_roundoff_errors = -9999
+  roundoff_errors_perturbation_type = "none"
+/
